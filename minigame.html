@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+    <script type="text/javascript" src="./js/jquery-ui.js"></script>
+	<link rel="stylesheet" type="text/css" href="./js/jquery-ui.css">
+<body>
+    <style>
+        *{
+            background-color: white;
+            color: #ED2B2A;
+        }
+        #lvl1{
+            font-weight: 800;
+            font-size: 35px;
+            margin-left: 20px;
+        }
+        #timer{
+            padding-left: 1400px;
+            font-weight: bold;
+            font-size: 25px;
+        }
+        #detik{
+            padding-left: 1400px;
+            font-weight: bold;
+            font-size: 25px;
+        }
+        #judul{
+            font-size: 50px;
+            font-weight: bold;
+        }
+        #work{
+            padding-left: 500px;
+            padding-top: 50px;
+        }
+        #chef{
+            padding-right: 50px;
+            padding-bottom: 30px;
+        }
+    </style>
+
+    <script>
+$(document).ready(function(){
+    
+    isiemail();
+    var email;
+    function isiemail() {
+        do {
+          email = prompt("Masukkan Emailmu");
+          if (email === null) {
+            return;
+          }
+          email = email.trim();
+        } while (email === "" || !email.includes('@'));
+        
+        alert("Terima kasih! Email Anda: " + email);
+      }
+            var count=30;
+            var interval=setInterval(function(){
+                count--;
+                $("#detik").html(count);
+                if(count==0){
+                    clearInterval(interval);
+                    alert("Waktu habis anda akan kembali ke halaman awal")
+                    window.location.href = "index.html";
+                }
+            },1000);
+        
+        $("#sport, #matic, #cub").draggable({
+          });
+        
+          $("#jabcub, #jabmatic, #jabsport").droppable({
+            accept: "#cub, #matic, #sport",
+            drop: function(event, ui) {
+              var profId = ui.draggable.attr("id");
+              var homeId = $(this).attr("id");
+              if (profId === "sport" && homeId === "jabsport" ||
+    profId === "cub" && homeId === "jabcub" ||
+    profId === "matic" && homeId === "jabmatic") {
+  ui.draggable.hide();
+}
+              if ($("#sport").is(":hidden") && $("#cub").is(":hidden") &&
+                    $("#matic").is(":hidden")) {
+                  $("#judul").html("Selamat");
+                  clearInterval(interval);
+                  alert("SELAMAT!!Kamu telah menang, Voucher akan dikirim ke email "+email)
+                  window.location.href = "index.html";
+                }
+            }
+          });
+        })
+    </script>
+    
+    <div id="lvl1">Minigame Berhadiah</div>
+    <div id="timer"> Timer : </div>
+    <span id="detik">30</span> 
+    <center><div id="judul">Masukkan Motor ke jenis motor</div></center>
+    <div id="work">
+        <table>
+            <tr>
+                <td><div id="matic"><img src="vario125.jpg" width="250px" height="150px"></div></td>
+                <td><div id="jabcub"><img src="tulisancub.png" width="250px" height="150px"></div></td>
+            </tr>
+            <tr>
+                <td><div id="sport"><img src="cbr250r.jpg" width="250px" height="150px"></div></td>
+                <td><div id="jabsport"><img src="tulisansport.png" width="250px" height="150px"></div></td>
+            </tr>
+            <tr>
+                <td><div id="cub"><img src="suprax.jpg" width="250px" height="150px"></div></td>
+                <td><div id="jabmatic"><img src="tulisanmatic.png" width="250px" height="150px"></div></td>
+            </tr>
+        </table>
+    </div>
+</body>    
+</html>
